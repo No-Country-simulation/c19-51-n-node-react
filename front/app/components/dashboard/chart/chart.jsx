@@ -6,7 +6,7 @@ import data from "../../data/graphicData";
 const Chart = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Weekly Recap</h2>
+      <h2 className={styles.title}>Sales Last Month </h2>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart
           width={500}

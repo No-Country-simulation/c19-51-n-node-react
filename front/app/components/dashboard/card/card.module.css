@@ -1,37 +1,45 @@
-.container{
-    background-color: var(--bgSoft);
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    gap: 20px;
-    cursor: pointer;
-    width: 100%;
+.container {
+  background-color: var(--bgSoft);
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  gap: 20px;
+  width: 100%;
+  transition: all 400ms;
+  display: flex;
 }
 
-.container:hover{
-    background-color: #2e374a;
+.containerRender {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
 }
 
-.texts{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.container:hover {
+  background-color: #2e374a;
 }
 
-.number{
-    font-size: 24px;
-    font-weight: 500;
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.detail{
-    font-size: 14px;
-    font-weight: 300;
+.number {
+  font-size: 24px;
+  font-weight: 500;
 }
 
-.positive{
-    color: lime;
+.detail {
+  font-size: 14px;
+  font-weight: 300;
 }
 
-.negative{
-    color: red;
+.positive {
+  color: lime;
+}
+
+.negative {
+  color: red;
 }

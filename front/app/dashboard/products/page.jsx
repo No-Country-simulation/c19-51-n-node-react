@@ -1,5 +1,11 @@
-const ProductsPage = () => {
-  return <div>ProductsPage</div>;
-};
+import styles from "./products.module.css"
 
-export default ProductsPage;
+const Products = () => {
+  return (
+    <div className={styles.container}>
+      
+    </div>
+  )
+}
+
+export default Products

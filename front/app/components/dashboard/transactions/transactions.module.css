@@ -41,9 +41,13 @@
 }
 
 .done{
-    background-color: #afd6ee75;
+    background-color: green;
 }
 
 .cancelled{
-    background-color: #f7737375;
+    background-color: red;
+}
+
+.inProcess{
+    background-color: blue;
 }

@@ -1,11 +1,13 @@
 .container {
   display: flex;
+  min-height: 100vh;
 }
 
 .menu {
   flex: 1;
   background-color: var(--bgSoft);
   padding: 20px;
+  border-radius: 5px;
 }
 
 .content {
@@ -32,6 +34,3 @@ gap: 20px;
 justify-content: space-between;
 }
 
-/* .side{
-flex:1;
-}*/

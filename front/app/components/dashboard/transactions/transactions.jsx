@@ -4,7 +4,7 @@ import styles from "./transactions.module.css";
 const Transactions = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Latest Transactions</h2>
+      <h2 className={styles.title}>Latest Ventas</h2>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -106,8 +106,8 @@ const Transactions = () => {
             </td>
 
             <td>
-              <span className={`${styles.status} ${styles.pending}`}>
-                Pending
+              <span className={`${styles.status} ${styles.inProcess}`}>
+                In Process
               </span>
             </td>
 
