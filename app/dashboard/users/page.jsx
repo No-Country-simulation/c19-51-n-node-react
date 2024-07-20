@@ -1,7 +1,9 @@
 import Search from "../../components/dashboard/search/search";
-import styles from "./users.module.css"
+import styles from "./users.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import Pagination from "../../components/dashboard/pagination/Pagination"
+
 
 const UsersPage = () => {
   return (
@@ -14,8 +16,7 @@ const UsersPage = () => {
       </div>
       <table className={styles.table}>
         <thead>
-          <tr>
-<<<<<<< HEAD
+          <tr className={styles.cat}>
             <td>Name Complete</td>
             <td>E-Mail</td>
             <td>Direction</td>
@@ -30,7 +31,13 @@ const UsersPage = () => {
           <tr>
             <td>
               <div className={styles.user}>
-                <Image src="/noavatar.png" alt="Img User" width={40} height={40} className={styles.userImage}/>
+                <Image
+                  src="/noavatar.png"
+                  alt="Img User"
+                  width={40}
+                  height={40}
+                  className={styles.userImage}
+                />
                 User Example
               </div>
             </td>
@@ -39,11 +46,14 @@ const UsersPage = () => {
             <td>Avenida siempre viva 123</td>
             <td>1165152620</td>
             <td>Admin123</td>
-            <td>16.07.24</td>
+            <td>16/07/24</td>
             <td>Admin</td>
             <td>
-              <span className={`${styles.active} ${styles.status}`}> Active</span>
-              </td>
+              <span className={`${styles.active} ${styles.status}`}>
+                {" "}
+                Active
+              </span>
+            </td>
           </tr>
         </tbody>
 
@@ -51,7 +61,13 @@ const UsersPage = () => {
           <tr>
             <td>
               <div className={styles.user}>
-                <Image src="/noavatar.png" alt="Img User" width={40} height={40} className={styles.userImage}/>
+                <Image
+                  src="/noavatar.png"
+                  alt="Img User"
+                  width={40}
+                  height={40}
+                  className={styles.userImage}
+                />
                 User Example
               </div>
             </td>
@@ -60,11 +76,14 @@ const UsersPage = () => {
             <td>Avenida siempre viva 123</td>
             <td>1163862620</td>
             <td>Admin123</td>
-            <td>16.07.24</td>
+            <td>16/07/24</td>
             <td>Seller</td>
             <td>
-              <span className={`${styles.inactive} ${styles.status}`}> Inactive</span>
-              </td>
+              <span className={`${styles.inactive} ${styles.status}`}>
+                {" "}
+                Inactive
+              </span>
+            </td>
           </tr>
         </tbody>
 
@@ -72,7 +91,13 @@ const UsersPage = () => {
           <tr>
             <td>
               <div className={styles.user}>
-                <Image src="/noavatar.png" alt="Img User" width={40} height={40} className={styles.userImage}/>
+                <Image
+                  src="/noavatar.png"
+                  alt="Img User"
+                  width={40}
+                  height={40}
+                  className={styles.userImage}
+                />
                 User Example
               </div>
             </td>
@@ -81,7 +106,7 @@ const UsersPage = () => {
             <td>Avenida siempre viva 123</td>
             <td>1163862620</td>
             <td>Admin123</td>
-            <td>16.07.24</td>
+            <td>16/07/24</td>
             <td>Seller</td>
             <td>
               <span className={`${styles.low} ${styles.status}`}> Low</span>
@@ -89,6 +114,7 @@ const UsersPage = () => {
           </tr>
         </tbody>
       </table>
+      <Pagination/>
     </div>
   );
 };

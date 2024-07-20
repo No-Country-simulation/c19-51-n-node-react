@@ -33,3 +33,8 @@
     border: none;
     color: var(--text);
   }
+
+.cat{
+  font-size: 16px;
+  font-weight: bold;
+}

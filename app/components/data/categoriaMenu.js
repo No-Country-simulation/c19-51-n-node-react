@@ -30,13 +30,12 @@ const menuItems = [
         icon: <MdShoppingBag />,
       },
       {
-        title: "Sales",
-        path: "/dashboard/sales",
+        title: "Transactions",
+        path: "/dashboard/transactions",
         icon: <MdAttachMoney />,
       },
-
       {
-        title: "About Us",
+        title: "About",
         path: "/dashboard/teams",
         icon: <MdPeople />,
       },
@@ -55,8 +54,24 @@ const menuItems = [
   //       path: "/dashboard/reports",
   //       icon: <MdAnalytics />,
   //     },
+      
   //   ],
-  // }
+  // },
+  {
+    title: "User",
+    list: [
+      {
+        title: "Settings",
+        path: "/dashboard/settings",
+        icon: <MdOutlineSettings />,
+      },
+      {
+        title: "Help",
+        path: "/dashboard/help",
+        icon: <MdHelpCenter />,
+      },
+    ],
+  },
 ];
 
 export default menuItems;

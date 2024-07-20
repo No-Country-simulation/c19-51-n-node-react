@@ -3,6 +3,7 @@
 import styles from "./sales.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import Search from "../../components/dashboard/search/page";
 
 const Sales = () => {
   const initialSales = [
@@ -13,7 +14,7 @@ const Sales = () => {
       product: "Iphone 15",
       amount: "1400$ USD",
       quantity: 1,
-      date: "16.07.24",
+      date: "16/07/24",
     },
     {
       id: 2,
@@ -22,7 +23,7 @@ const Sales = () => {
       product: "Samsung Galaxy S21",
       amount: "1200$ USD",
       quantity: 1,
-      date: "17.07.24",
+      date: "17/07/24",
     },
   ];
 
@@ -38,9 +39,12 @@ const Sales = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.top}>
+        <Search placeholder="Search a Sale..." />
+      </div>
       <table className={styles.table}>
         <thead>
-          <tr>
+          <tr className={styles.cat}>
             <td>Name</td>
             <td>Id sell</td>
             <td>Product</td>
@@ -86,6 +90,7 @@ const Sales = () => {
           ))}
         </tbody>
       </table>
+      
     </div>
   );
 };
