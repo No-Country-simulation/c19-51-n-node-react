@@ -1,6 +1,6 @@
 'use client';
 import Card from "./card";
-import cardsData from "c:/Users/vital/OneDrive/Escritorio/NoCountry/front/app/components/data/cards";
+import cardsData from "../../data/cards"
 import styles from "./card.module.css";
 
 const RendeCards = () => {
