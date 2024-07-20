@@ -21,6 +21,7 @@ export const getProductById = async (req, res) => {
         }
         res.status(200).json(product);
     } catch (error) {
+        logger.error("Error retrieving product:", error);
         res.status(500).json({ message: "Error retrieving product", error });
     }
 };
