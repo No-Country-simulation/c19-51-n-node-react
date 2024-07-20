@@ -18,6 +18,11 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 300ms;
+}
+
+.addButton:hover{
+    background-color: var(--bg);
 }
 
 .table{
@@ -50,6 +55,11 @@
     color: var(--text);
     border: none;
     cursor: pointer;
+    transition: all 300ms;
+}
+
+.button:hover{
+    background-color: var(--bg);
 }
 
 .view{
@@ -59,3 +69,10 @@
 .delete{
     background-color: crimson;
 }
+
+
+.cat{
+    font-size: 16px;
+    font-weight: bold;
+  }
+  

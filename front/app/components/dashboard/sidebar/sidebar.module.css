@@ -20,6 +20,10 @@
   flex-direction: column;
 }
 
+.userName{
+  font-weight: 500;
+}
+
 .userTitle {
   font-size: 12px;
   color: var(--textSoft);
@@ -51,5 +55,5 @@
 }
 
 .logout:hover {
-  background-color: #2e374a;
+  background-color: var(--bg);
 }

@@ -1,37 +1,50 @@
-.container{
-    background-color: var(--bgSoft);
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    gap: 20px;
-    cursor: pointer;
-    width: 100%;
+.container {
+  background-color: var(--bgSoft);
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  gap: 20px;
+  width: 100%;
+  transition: all 400ms;
+  display: flex;
 }
 
-.container:hover{
-    background-color: #2e374a;
+.containerRender {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
 }
 
-.texts{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.title{
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.number{
-    font-size: 24px;
-    font-weight: 500;
+.container:hover {
+  background-color: #2e374a;
 }
 
-.detail{
-    font-size: 14px;
-    font-weight: 300;
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.positive{
-    color: lime;
+.number {
+  font-size: 24px;
+  font-weight: 500;
 }
 
-.negative{
-    color: red;
+.detail {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.positive {
+  color: lime;
+}
+
+.negative {
+  color: red;
 }

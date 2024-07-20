@@ -1,0 +1,40 @@
+.container {
+  background-color: var(--bgSoft);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+}
+
+.table td {
+  padding: 10px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userImage {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.select {
+    background-color: var(--bgSoft);
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    border: none;
+    color: var(--text);
+  }
+
+.cat{
+  font-size: 16px;
+  font-weight: bold;
+}
