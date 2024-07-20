@@ -11,7 +11,7 @@ const Dashboard = () => {
     <div className={styles.wrapper}>
       <div className={styles.main}>
         <div className={styles.cards}>
-          <RendeCards />
+          <RendeCards/>
         </div>
         <Transactions />
         <Chart />
