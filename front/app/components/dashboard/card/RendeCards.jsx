@@ -1,6 +1,6 @@
 'use client';
 import Card from "./card";
-import cardsData from "../../data/cards"
+import cardsData from "../../data/cards";
 import styles from "./card.module.css";
 
 const RendeCards = () => {

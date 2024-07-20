@@ -7,6 +7,8 @@ import logger from './utils/logger.js';
 
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import productRoutes from "./routes/product.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 import { FRONTEND_URL } from "./config.js";
 import { errorHandler } from './middlewares/errorHandler.js';
 
@@ -31,6 +33,8 @@ app.use((req, res, next) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
 
 // Middleware de manejo de errores
 app.use(errorHandler);

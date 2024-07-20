@@ -34,14 +34,13 @@ const menuItems = [
         path: "/dashboard/sales",
         icon: <MdAttachMoney />,
       },
-
       {
-        title: "About Us",
+        title: "About",
         path: "/dashboard/about",
         icon: <MdPeople />,
       },
     ],
-  }
+  },
   // {
   //   title: "Analytics",
   //   list: [
@@ -55,8 +54,24 @@ const menuItems = [
   //       path: "/dashboard/reports",
   //       icon: <MdAnalytics />,
   //     },
+      
   //   ],
-  // }
+  // },
+  {
+    title: "User",
+    list: [
+      {
+        title: "Settings",
+        path: "/dashboard/settings",
+        icon: <MdOutlineSettings />,
+      },
+      {
+        title: "Help",
+        path: "/dashboard/help",
+        icon: <MdHelpCenter />,
+      },
+    ],
+  },
 ];
 
 export default menuItems;

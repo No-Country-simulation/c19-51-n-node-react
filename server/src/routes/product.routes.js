@@ -1,0 +1,25 @@
+import { Router } from 'express';
+import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/product.controller.js';
+import { authenticateToken } from '../middlewares/authMiddleware.js';
+import validateObjectId from '../middlewares/validateObjectId.js';
+import checkAdmin from '../middlewares/checkAdmin.js';
+import { validateCreateUser, validateUpdateUser } from '../middlewares/validation.js';
+
+const router = Router();
+
+// Obtener todos los products
+router.get('/', getAllProducts);
+
+// Obtener un producto por ID
+router.get('/:id', validateObjectId, getProductById);
+
+// Crear un nuevoproducto (solo para administradores?)
+router.post('/', createProduct);
+
+// Actualizar un producto existente (solo para administradores?)
+router.put('/:id', validateObjectId, updateProduct);
+
+// Eliminar producto (solo para administradores?)
+router.delete('/:id', validateObjectId, deleteProduct);
+
+export default router;
