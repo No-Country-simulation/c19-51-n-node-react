@@ -62,7 +62,6 @@ const ProductsPage = () => {
   <Pagination/>
 </div>;
 };
->>>>>>> 1ed36fcf8b27ab3bfdcdcdff174348e421a3eb38
 
 const Products = () => {
   return (
