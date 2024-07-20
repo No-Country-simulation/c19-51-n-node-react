@@ -1,4 +1,4 @@
-import styles from "@/app/login.module.css"
+import styles from "./login.module.css"
 
 const LoginPage = () => {
   return <div className={styles.container}>    

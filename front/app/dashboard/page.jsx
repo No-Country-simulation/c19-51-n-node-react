@@ -12,9 +12,10 @@ const Dashboard = () => {
           <Card />
           <Card />
           <Card />
+          <Card />
         </div>
-        <Transactions/>
-        <Chart/>
+        <Transactions />
+        <Chart />
       </div>
       {/* <div className={styles.side}>
         <Rightbar/>
