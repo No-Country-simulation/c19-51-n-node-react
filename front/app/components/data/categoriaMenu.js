@@ -37,11 +37,11 @@ const menuItems = [
 
       {
         title: "About Us",
-        path: "/dashboard/teams",
+        path: "/dashboard/about",
         icon: <MdPeople />,
       },
     ],
-  },
+  }
   // {
   //   title: "Analytics",
   //   list: [

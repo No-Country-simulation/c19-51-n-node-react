@@ -15,7 +15,6 @@ const Dashboard = () => {
         <Transactions/>
         <Chart/>
       </div>
-      
     </div>
   );
 };

@@ -16,6 +16,11 @@
   width: 100%;
 }
 
+.title{
+  font-weight: bold;
+  font-size: 16px;
+}
+
 .container:hover {
   background-color: #2e374a;
 }
