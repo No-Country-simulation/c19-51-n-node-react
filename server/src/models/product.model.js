@@ -57,14 +57,14 @@ const productSchema = new mongoose.Schema({
 });
 
 // Middleware para actualizar el campo `updatedAt` antes de guardar
-userSchema.pre('save', function (next) {
+productSchema.pre('save', function (next) {
     this.updatedAt = Date.now();
     next();
 });
 
-userSchema.pre('findOneAndUpdate', function (next) {
+productSchema.pre('findOneAndUpdate', function (next) {
     this.set({ updatedAt: Date.now() });
     next();
 });
 
-export default mongoose.model('Products', userSchema);
+export default mongoose.model('Product', productSchema);
