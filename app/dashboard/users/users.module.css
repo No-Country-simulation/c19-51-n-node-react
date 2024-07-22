@@ -59,9 +59,22 @@
 .inactive{
     background-color: red;
 }
+.button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--text);
+    border: none;
+    cursor: pointer;
+    transition: all 300ms;
+    margin-top: 17px;
+}
 
-.low{
-    background-color: indianred;
+.button:hover{
+    background-color: var(--bg);
+}
+
+.view{
+    background-color:   teal;
 }
 
 .cat{

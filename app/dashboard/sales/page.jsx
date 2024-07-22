@@ -1,5 +1,5 @@
 "use client";
-
+import Pagination from "../../components/dashboard/pagination/Pagination";
 import styles from "./sales.module.css";
 import Image from "next/image";
 import { useState } from "react";
@@ -90,7 +90,7 @@ const Sales = () => {
           ))}
         </tbody>
       </table>
-      
+      <Pagination/>
     </div>
   );
 };

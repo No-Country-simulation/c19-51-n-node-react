@@ -1,13 +1,81 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.embla {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--bgSoft);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  height: 30rem;
 }
 
-.titlep{
-    padding-top: 30px;
-    font-size: 20px;
-    color: var(--textSoft);
-    text-align: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.embla__container {
+  height: 100%;
+  color: white;
+  border-radius: 0.375rem;
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 50px;
+}
+
+.embla__slide {
+  width: 14rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 36%;
+  min-width: 0;
+}
+
+.slide_image {
+  width: 7rem;
+  border-radius: 9999px;
+  margin-top: 1rem;
+}
+
+.slide_content {
+  padding: 1rem;
+  text-align: center;
+}
+
+.slide_name {
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: white;
+  padding: 0.5rem;
+}
+
+.slide_team {
+  color: var(--textSoft);
+  font-size: 1rem;
+  text-transform: lowercase;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.link_button {
+  background-color: white;
+  text-align: center;
+  width: auto;
+  border-radius: 9999px;
+  font-weight: 500;
+  color: black;
+  transition-duration: 60ms;
+}
+
+.titlep {
+  padding-top: 20px;
+  font-size: 20px;
+  color: var(--textSoft);
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.embla__viewport {
+  overflow: hidden;
 }
