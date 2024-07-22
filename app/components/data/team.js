@@ -7,10 +7,10 @@ const integrantes = [
     },
 
     {
-        imagen: '/noavatar.png',
-        nombre: 'Integrante 1',
-        equipo: 'Equipo 1',
-        link: 'https://example.com',
+        imagen: '/imageJoha.jpg',
+        nombre: 'Johansen Picado',
+        equipo: 'Front End',
+        link: 'https://github.com/Johamaster04',
       },
 
       {

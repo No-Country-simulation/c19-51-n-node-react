@@ -4,6 +4,7 @@ import styles from "./about.module.css"
 import integrantes from "../../components/data/team"
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import Image from 'next/image';
 
 export default function AboutUs() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
@@ -17,16 +18,18 @@ export default function AboutUs() {
           <div className={styles.embla__container}>
             {integrantes.map((integrante) => (
               <div key={integrante.nombre} className={styles.embla__slide}>
-                <img
+                <Image
                   className={styles.slide_image}
                   src={integrante.imagen}
                   alt={integrante.nombre}
+                  width={115}
+                  height={115}
                 />
                 <div className={styles.slide_content}>
                   <div className={styles.slide_name}>{integrante.nombre}</div>
                   <div className={styles.slide_team}>
                     <p>{integrante.equipo}</p>
-                    <a href={integrante.link} className={styles.link_button}>
+                    <a href={integrante.link} className={styles.link_button} target="_blank">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
