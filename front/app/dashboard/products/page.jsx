@@ -2,7 +2,8 @@ import styles from "./products.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "../../components/dashboard/search/page";
-import Pagination from "../../components/dashboard/pagination/Pagination"
+import Pagination from "../../components/dashboard/pagination/Pagination";
+import products from "../../components/data/productsData";
 
 const ProductsPage = () => {
   return (
@@ -26,46 +27,44 @@ const ProductsPage = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className={styles.product}>
-                <Image
-                  src="/noproduct.jpg"
-                  alt=""
-                  width={40}
-                  height={40}
-                  className={styles.productImage}
-                />
-                Iphone
-              </div>
-            </td>
-            <td>Example Description</td>
-            <td>Smartphone</td>
-            <td>$ 999</td>
-            <td>14/07/24</td>
-            <td>72</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href="/">
-                  <button className={`${styles.button} ${styles.view}`}>
-                    View
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>
+                <div className={styles.product}>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={40}
+                    height={40}
+                    className={styles.productImage}
+                  />
+                  {product.name}
+                </div>
+              </td>
+              <td>{product.description}</td>
+              <td>{product.category}</td>
+              <td>{product.price}</td>
+              <td>{product.date}</td>
+              <td>{product.stock}</td>
+              <td>
+                <div className={styles.buttons}>
+                  <Link href={`/dashboard/products/${product.id}`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      View
+                    </button>
+                  </Link>
+                  <button className={`${styles.button} ${styles.delete}`}>
+                    Delete
                   </button>
-                </Link>
-                <button className={`${styles.button} ${styles.delete}`}>
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      <Pagination/>
+      <Pagination />
     </div>
   );
-};
-
-const Products = () => {
-  return <div className={styles.container}></div>;
 };
 
 export default ProductsPage;
