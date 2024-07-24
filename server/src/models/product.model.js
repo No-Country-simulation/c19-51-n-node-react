@@ -41,8 +41,10 @@ const productSchema = new mongoose.Schema({
         required: false
     },
     category: {
-        type: String,
-        enum: ['portatil', 'tablet', 'pc_escritorio', 'monitor', 'software', 'accesorios'],
+        // type: String,
+        // enum: ['portatil', 'tablet', 'pc_escritorio', 'monitor', 'software', 'accesorios'],
+        type: mongoose.Schema.ObjectId,
+        ref: "Category",
         required: true
     },
     registerDate: {

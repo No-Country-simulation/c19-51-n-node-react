@@ -1,4 +1,5 @@
 import Product from "../models/product.model.js";
+import Category from "../models/category.model.js"
 import logger from '../utils/logger.js';
 
 // Obtener todos los productos
@@ -36,6 +37,11 @@ export const createProduct = async (req, res) => {
             return res.status(400).json({ message: "Product already exist" });
         }
 
+        const existingCategory = await Category.findById(category);
+        if (!category) {
+            return res.status(400).json({ message: "Category does not exist" });
+        }
+
         const newProduct = new Product({
             productId,
             image,
@@ -61,6 +67,13 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const { productId, brand, model, description, specs, price, qty, image, category } = req.body;
+
+        if (category) {
+            const existingCategory = await Category.findById(category);
+            if (!category) {
+                return res.status(400).json({ message: "Category does not exist" });
+            }
+        }
 
         const product = await Product.findByIdAndUpdate(
             req.params.id,

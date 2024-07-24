@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from '../controllers/category.controller.js'
+import { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from '../controllers/categories.controller.js'
 import validateObjectId from '../middlewares/validateObjectId.js'
 
 const router = Router();

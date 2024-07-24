@@ -34,7 +34,8 @@ const userSchema = new mongoose.Schema({
     identification: {
         type: String,
         trim: true,
-        required: false
+        required: false,
+        unique: true
     },
     role: {
         type: String,
@@ -64,12 +65,12 @@ const userSchema = new mongoose.Schema({
 });
 
 // Middleware para actualizar el campo `updatedAt` antes de guardar
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     this.updatedAt = Date.now();
     next();
 });
 
-userSchema.pre('findOneAndUpdate', function(next) {
+userSchema.pre('findOneAndUpdate', function (next) {
     this.set({ updatedAt: Date.now() });
     next();
 });

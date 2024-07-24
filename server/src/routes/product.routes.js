@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/product.controller.js';
+import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/products.controller.js';
 import { authenticateToken } from '../middlewares/authMiddleware.js';
 import validateObjectId from '../middlewares/validateObjectId.js';
 import checkAdmin from '../middlewares/checkAdmin.js';
