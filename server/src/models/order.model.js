@@ -1,34 +1,25 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    orderId: {
-        type: String,
-        trim: true,
-        required: true,
-        unique: true
-    },
-    qty: {
-        type: Number,
-        trim: true,
-        required: true
-    },
+    products: [
+        {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true
+            },
+            qty: {
+                type: Number,
+                required: true
+            }
+        }
+    ],
     description: {
         type: String,
         required: false
     },
-    price: {
+    totalPrice: {
         type: Number,
-        trim: true,
-        required: true
-    },
-    priceu: {
-        type: Number,
-        trim: true,
-        required: true
-    },
-    totalItem: {
-        type: Number,
-        trim: true,
         required: true
     },
     registerDate: {
@@ -48,9 +39,9 @@ orderSchema.pre('save', function (next) {
     next();
 });
 
-orderSchema.pre('findOneAndUodate', function (next) {
+orderSchema.pre('findOneAndUpdate', function (next) {
     this.set({ updatedAt: Date.now() });
     next();
 });
 
-export default mongoose.model('order', orderSchema)
+export default mongoose.model('Order', orderSchema);
