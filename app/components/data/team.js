@@ -1,6 +1,6 @@
 const integrantes = [
     {
-      imagen: '/noavatar.png',
+      imagen: '/imageTobi.jpeg',
       nombre: 'Vitale Tobias',
       equipo: 'Front-End',
       link: 'https://github.com/TBVitale',
