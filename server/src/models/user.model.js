@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
+    identification: {
+        type: String,
+        trim: true,
+        required: true,
+        unique: true
+    },
     firstName: {
         type: String,
         trim: true,
@@ -30,12 +36,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: false
-    },
-    identification: {
-        type: String,
-        trim: true,
-        required: false,
-        unique: true
     },
     role: {
         type: String,

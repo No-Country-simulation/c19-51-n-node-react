@@ -77,3 +77,35 @@ export const validateUpdateUser = (req, res, next) => {
         return res.status(400).json({ errors: e.errors });
     }
 };
+
+const createProductSchema = z.object({
+    productId: z.string().nonempty({ message: 'productId is required' }),
+    brand: z.string().nonempty({ message: 'Brand is required' }),
+    model: z.string().nonempty({ message: 'Model is required' }),
+    description: z.string().optional(),
+    specs: z.string().optional(),
+    price: z.number().positive({ message: 'Price must be a positive number' }),
+    stock: z.number().int().positive({ message: 'Stock must be a positive number' }),
+    image: z.string().optional(),
+    categoryName: z.string().nonempty({ message: 'Category name is required' })
+});
+
+const updateProductSchema = createProductSchema.partial();
+
+export const validateCreateProduct = (req, res, next) => {
+    try {
+        req.body = createProductSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};
+
+export const validateUpdateProduct = (req, res, next) => {
+    try {
+        req.body = updateProductSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};

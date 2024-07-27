@@ -28,12 +28,11 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        trim: true,
-        required: true
+        required: true,
+        min: 0
     },
-    qty: {
+    stock: {
         type: Number,
-        trim: true,
         required: true
     },
     image: {

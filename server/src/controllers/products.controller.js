@@ -5,7 +5,7 @@ import logger from '../utils/logger.js';
 // Obtener todos los productos
 export const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find().populate('category', 'name');
         res.status(200).json(products);
     } catch (error) {
         logger.error("Error retrieving products:", error);
@@ -16,7 +16,7 @@ export const getAllProducts = async (req, res) => {
 // Obtener un producto por ID
 export const getProductById = async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findById(req.params.id).populate('category', 'name');
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
         }
@@ -30,17 +30,24 @@ export const getProductById = async (req, res) => {
 // Crear un nuevo producto (por un administrador?)
 export const createProduct = async (req, res) => {
     try {
-        let { productId, brand, model, description, specs, price, qty, image, category } = req.body;
+        let { productId, brand, model, description, specs, price, stock, image, categoryName } = req.body;
 
         const existingProduct = await Product.findOne({ productId });
         if (existingProduct) {
             return res.status(400).json({ message: "Product already exist" });
         }
 
-        const existingCategory = await Category.findById(category);
+        // Buscar categoría
+        const category = await Category.findOne({ name: categoryName });
         if (!category) {
-            return res.status(400).json({ message: "Category does not exist" });
-        }
+            return res.status(400).json({ message: "Invalid Category" })
+        };
+
+        // Verificar si existe la categoria
+        // const existingCategory = await Category.findById(category);
+        // if (!category) {
+        //     return res.status(400).json({ message: "Category does not exist" });
+        // }
 
         const newProduct = new Product({
             productId,
@@ -50,11 +57,14 @@ export const createProduct = async (req, res) => {
             description,
             specs,
             price,
-            qty,
-            category
+            stock,
+            category: category._id
         });
 
         await newProduct.save();
+
+        // Poblar la categoría con el nombre antes de devolver la respuesta
+        await newProduct.populate('category', 'name').execPopulate();
 
         res.status(201).json({ message: "Product created successfully", product: newProduct });
     } catch (error) {
@@ -66,7 +76,7 @@ export const createProduct = async (req, res) => {
 // Actualizar un producto existente (por un administrador?)
 export const updateProduct = async (req, res) => {
     try {
-        const { productId, brand, model, description, specs, price, qty, image, category } = req.body;
+        const { productId, brand, model, description, specs, price, stock, image, category } = req.body;
 
         if (category) {
             const existingCategory = await Category.findById(category);
@@ -77,7 +87,7 @@ export const updateProduct = async (req, res) => {
 
         const product = await Product.findByIdAndUpdate(
             req.params.id,
-            { productId, brand, model, description, specs, price, qty, image, category },
+            { productId, brand, model, description, specs, price, stock, image, category },
             { new: true, runValidators: true }
         );
 
