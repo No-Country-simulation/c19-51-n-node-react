@@ -41,7 +41,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['administrator', 'seller'],
         default: 'seller',
-        required: true
     },
     photo: {
         type: String,
