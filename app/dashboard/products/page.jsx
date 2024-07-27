@@ -52,6 +52,7 @@ const ProductsPage = () => {
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
+                    
                   </Link>
                   <button className={`${styles.button} ${styles.delete}`}>
                     Delete
