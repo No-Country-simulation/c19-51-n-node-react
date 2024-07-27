@@ -1,7 +1,15 @@
 "use client"
 import styles from "./adduser.module.css"
+import { useState } from "react";
 
   const addUser = () => {
+
+    const [newUser, setNewUser] = ('');
+
+    updateDatos = () => {
+      
+    }
+
   return (
     <div className={styles.container}>
       <form action={addUser} className={styles.form}>
@@ -49,7 +57,7 @@ import styles from "./adduser.module.css"
           rows="16"
           placeholder="Address and specifications"
         ></textarea>
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={updateDatos}>Submit</button>
       </form>
     </div>
   );
