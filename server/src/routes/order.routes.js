@@ -1,29 +1,24 @@
 import { Router } from 'express';
-import {
-    getAllOrders,
-    getOrderById,
-    createOrder,
-    updateOrder,
-    deleteOrder
-} from '../controllers/orders.controller.js';
+import { getAllOrders, getOrderById, createOrder, updateOrder, deleteOrder } from '../controllers/orders.controller.js';
 import { authenticateToken } from '../middlewares/authMiddleware.js';
 import validateObjectId from '../middlewares/validateObjectId.js';
+import { validateCreateOrder, validateUpdateOrder } from '../middlewares/validation.js'
 
 const router = Router();
 
 // Obtener todas las órdenes
-router.get('/', authenticateToken, getAllOrders);
+router.get('/', getAllOrders);
 
 // Obtener una orden por ID
-router.get('/:id', authenticateToken, validateObjectId, getOrderById);
+router.get('/:id', validateObjectId, getOrderById);
 
 // Crear una nueva orden
-router.post('/', authenticateToken, createOrder);
+router.post('/', validateCreateOrder, createOrder);
 
 // Actualizar una orden existente
-router.put('/:id', authenticateToken, validateObjectId, updateOrder);
+router.put('/:id', validateObjectId, validateUpdateOrder, updateOrder);
 
 // Eliminar una orden
-router.delete('/:id', authenticateToken, validateObjectId, deleteOrder);
+router.delete('/:id', validateObjectId, deleteOrder);
 
 export default router;

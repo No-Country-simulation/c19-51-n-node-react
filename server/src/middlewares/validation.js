@@ -109,3 +109,36 @@ export const validateUpdateProduct = (req, res, next) => {
         res.status(400).json({ errors: e.errors });
     }
 };
+
+const createOrderSchema = z.object({
+    items: z.array(z.object({
+        productId: z.string().nonempty({ message: 'Product ID is required' }),
+        quantity: z.number().int().positive({ message: 'Quantity must be a positive number' })
+    })).nonempty({ message: 'Items cannot be empty' }),
+});
+
+const updateOrderSchema = z.object({
+    // status: z.enum(['pending', 'accepted', 'in_process', 'cancelled'], { required_error: 'Status is required' }),
+    products: z.array(z.object({
+        product: z.string().nonempty({ message: 'Product ID is required' }),
+        quantity: z.number().int().positive({ message: 'Quantity must be a positive number' })
+    }))
+});
+
+export const validateCreateOrder = (req, res, next) => {
+    try {
+        req.body = createOrderSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};
+
+export const validateUpdateOrder = (req, res, next) => {
+    try {
+        req.body = updateOrderSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};
