@@ -84,7 +84,11 @@ const UsersPage = () => {
               </Link>
               </div>
               <td>
-                <span className={`${styles[user.status.toLowerCase()]} ${styles.status}`}>
+                <span
+                  className={`${styles[user.status.toLowerCase()]} ${
+                    styles.status
+                  }`}
+                >
                   {user.status}
                 </span>
               </td>
@@ -92,7 +96,7 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 };

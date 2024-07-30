@@ -7,7 +7,7 @@
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;
-  height: 30rem;
+  /* height: 30rem; */
 }
 
 .embla__container {
@@ -20,7 +20,7 @@
 }
 
 .embla__slide {
-  width: 14rem;
+  /* width: 14rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
