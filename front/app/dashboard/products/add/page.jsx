@@ -15,6 +15,11 @@ const AddproductPage = () =>{
           <input type="number" placeholder="stock" name="stock"  />
           <input type="text" placeholder="color" name="color"  />
           <input type="text" placeholder="size" name="size"  />
+          <input
+          type="file"
+          name="profileImage"
+          accept="image/*"
+        />
           <textarea name="desc" id="desc" rows="16" placeholder="Description"></textarea>
           <button type="submit">Submit</button>
         </form>

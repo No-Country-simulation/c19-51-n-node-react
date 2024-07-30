@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
+    identification: {
+        type: String,
+        trim: true,
+        required: true,
+        unique: true
+    },
     firstName: {
         type: String,
         trim: true,
@@ -31,17 +37,10 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: false
     },
-    identification: {
-        type: String,
-        trim: true,
-        required: false,
-        unique: true
-    },
     role: {
         type: String,
         enum: ['administrator', 'seller'],
         default: 'seller',
-        required: true
     },
     photo: {
         type: String,

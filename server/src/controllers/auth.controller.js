@@ -5,7 +5,7 @@ import logger from '../utils/logger.js';
 // Registrar un nuevo usuario (por el propio usuario)
 export const register = async (req, res) => {
     try {
-        let { firstName, lastName, email, password, address, phone, identification, role, photo } = req.body;
+        let { firstName, lastName, email, password, address, phone, identification, photo } = req.body;
 
         // Convertir email a minúsculas
         email = email.toLowerCase();
@@ -25,7 +25,6 @@ export const register = async (req, res) => {
             address,
             phone,
             identification,
-            role,
             photo
         });
 

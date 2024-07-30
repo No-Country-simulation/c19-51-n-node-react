@@ -8,7 +8,7 @@ import { validateCreateUser, validateUpdateUser } from '../middlewares/validatio
 const router = Router();
 
 // Obtener todos los usuarios
-router.get('/', authenticateToken, getAllUsers);
+router.get('/', getAllUsers);
 
 // Obtener un usuario por ID
 router.get('/:id', authenticateToken, validateObjectId, getUserById);

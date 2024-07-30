@@ -30,8 +30,8 @@ export const getUserById = async (req, res) => {
 // Crear un nuevo usuario (por un administrador)
 export const createUser = async (req, res) => {
     try {
-        let { firstName, lastName, email, password, address, phone, identification, role, photo } = req.body;
-        
+        let { identification, firstName, lastName, email, password, address, phone, role, photo } = req.body;
+
         // Convertir email a minúsculas
         email = email.toLowerCase();
 
@@ -43,13 +43,13 @@ export const createUser = async (req, res) => {
         const hashedPassword = await hashPassword(password);
 
         const newUser = new User({
+            identification,
             firstName,
             lastName,
             email,
             password: hashedPassword,
             address,
             phone,
-            identification,
             role,
             photo
         });
@@ -66,11 +66,11 @@ export const createUser = async (req, res) => {
 // Actualizar un usuario existente (por un administrador)
 export const updateUser = async (req, res) => {
     try {
-        const { firstName, lastName, address, phone, identification, role, photo, status } = req.body;
+        const { identification, firstName, lastName, address, phone, role, photo, status } = req.body;
 
         const user = await User.findByIdAndUpdate(
             req.params.id,
-            { firstName, lastName, address, phone, identification, role, photo, status },
+            { identification, firstName, lastName, address, phone, role, photo, status },
             { new: true, runValidators: true }
         );
 

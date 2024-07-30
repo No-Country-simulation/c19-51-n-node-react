@@ -77,3 +77,68 @@ export const validateUpdateUser = (req, res, next) => {
         return res.status(400).json({ errors: e.errors });
     }
 };
+
+const createProductSchema = z.object({
+    productId: z.string().nonempty({ message: 'productId is required' }),
+    brand: z.string().nonempty({ message: 'Brand is required' }),
+    model: z.string().nonempty({ message: 'Model is required' }),
+    description: z.string().optional(),
+    specs: z.string().optional(),
+    price: z.number().positive({ message: 'Price must be a positive number' }),
+    stock: z.number().int().positive({ message: 'Stock must be a positive number' }),
+    image: z.string().optional(),
+    categoryName: z.string().nonempty({ message: 'Category name is required' })
+});
+
+const updateProductSchema = createProductSchema.partial();
+
+export const validateCreateProduct = (req, res, next) => {
+    try {
+        req.body = createProductSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};
+
+export const validateUpdateProduct = (req, res, next) => {
+    try {
+        req.body = updateProductSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};
+
+const createOrderSchema = z.object({
+    items: z.array(z.object({
+        productId: z.string().nonempty({ message: 'Product ID is required' }),
+        quantity: z.number().int().positive({ message: 'Quantity must be a positive number' })
+    })).nonempty({ message: 'Items cannot be empty' }),
+});
+
+const updateOrderSchema = z.object({
+    // status: z.enum(['pending', 'accepted', 'in_process', 'cancelled'], { required_error: 'Status is required' }),
+    products: z.array(z.object({
+        product: z.string().nonempty({ message: 'Product ID is required' }),
+        quantity: z.number().int().positive({ message: 'Quantity must be a positive number' })
+    }))
+});
+
+export const validateCreateOrder = (req, res, next) => {
+    try {
+        req.body = createOrderSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};
+
+export const validateUpdateOrder = (req, res, next) => {
+    try {
+        req.body = updateOrderSchema.parse(req.body);
+        next();
+    } catch (e) {
+        res.status(400).json({ errors: e.errors });
+    }
+};

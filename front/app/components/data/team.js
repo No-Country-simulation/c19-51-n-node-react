@@ -1,7 +1,7 @@
 const integrantes = [
     {
-      imagen: '/noavatar.png',
-      nombre: 'Vitale Tobias',
+      imagen: '/imageTobi.jpeg',
+      nombre: 'Tobias Vitale',
       equipo: 'Front-End',
       link: 'https://github.com/TBVitale',
     },
@@ -14,31 +14,31 @@ const integrantes = [
       },
 
       {
-        imagen: '/noavatar.png',
-        nombre: 'Integrante 1',
-        equipo: 'Equipo 1',
-        link: 'https://example.com',
+        imagen: '/imageAngel.png',
+        nombre: 'Angel Peñalver',
+        equipo: 'Back End',
+        link: 'https://github.com/PueltoRiko',
       },
 
       {
-        imagen: '/noavatar.png',
-        nombre: 'Integrante 1',
-        equipo: 'Equipo 1',
-        link: 'https://example.com',
+        imagen: '/imageEnma.png',
+        nombre: 'Enmanuel Rodriguez',
+        equipo: 'Full Stack',
+        link: 'https://github.com/enmanuelrodmac',
       },
 
       {
-        imagen: '/noavatar.png',
-        nombre: 'Integrante 1',
-        equipo: 'Equipo 1',
-        link: 'https://example.com',
+        imagen: '/imageJohn.jpg',
+        nombre: 'Jhon Fonseca 1',
+        equipo: 'Back End',
+        link: 'https://github.com/John-fonseca',
       },
 
       {
-        imagen: '/noavatar.png',
-        nombre: 'Integrante 1',
-        equipo: 'Equipo 1',
-        link: 'https://example.com',
+        imagen: '/imageLuis.jpg',
+        nombre: 'Luis Castañeda',
+        equipo: 'Back End',
+        link: 'https://github.com/luis1558',
       },
     
   ];

@@ -1,13 +1,39 @@
 "use client"
 import Search from "../../components/dashboard/search/search";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./users.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import Pagination from "../../components/dashboard/pagination/Pagination"
-import initialUsers from "../../components/data/usersData.js"
 
 
 const UsersPage = () => {
+
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      const fetchUsers = async () => {
+        try {
+          const response = await axios.get('http://localhost:8000/api/users');
+          setUsers(response.data)
+          console.log(response);
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchUsers();
+    }, []);
+  
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+    
+  
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -23,7 +49,6 @@ const UsersPage = () => {
             <td>E-Mail</td>
             <td>Direction</td>
             <td>Phone</td>
-            <td>Password</td>
             <td>Created at </td>
             <td>Role</td>
             <td>Action</td>
@@ -31,8 +56,8 @@ const UsersPage = () => {
           </tr>
         </thead>
         <tbody>
-          {initialUsers.map((user, index) => (
-            <tr key={index}>
+          {users.map((user) => (
+            <tr key={user._id}>
               <td>
                 <div className={styles.user}>
                   <Image
@@ -42,14 +67,14 @@ const UsersPage = () => {
                     height={40}
                     className={styles.userImage}
                   />
-                  {user.name}
+                  {user.firstName} {" "}
+                  {user.lastName}
                 </div>
               </td>
               <td>{user.email}</td>
-              <td>{user.direction}</td>
+              <td>{user.address}</td>
               <td>{user.phone}</td>
-              <td>{user.password}</td>
-              <td>{user.createdAt}</td>
+              <td>{new Date(user.registerDate).toLocaleDateString()}</td>
               <td>{user.role}</td>
               <div>
                 <Link href={"/dashboard/users/test"}>
