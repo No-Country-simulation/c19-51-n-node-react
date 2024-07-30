@@ -1,11 +1,53 @@
+"use client"
 import styles from "./products.module.css";
 import Link from "next/link";
-import Image from "next/image";
 import Search from "../../components/dashboard/search/page";
 import Pagination from "../../components/dashboard/pagination/Pagination";
-import products from "../../components/data/productsData";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+
 
 const ProductsPage = () => {
+
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/products/');
+        console.log(response.data);
+        setProducts(response.data)
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -27,24 +69,22 @@ const ProductsPage = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
+          {currentItems.map((product) => (
+            <tr key={product._id}>
               <td>
                 <div className={styles.product}>
-                  <Image
-                    src={product.image}
+                  <img
+                    src="/noproduct.jpg"
                     alt={product.name}
-                    width={40}
-                    height={40}
                     className={styles.productImage}
                   />
                   {product.name}
                 </div>
               </td>
               <td>{product.description}</td>
-              <td>{product.category}</td>
+              <td>{`${product.category.name} ${product.category._id}`}</td>
               <td>{product.price}</td>
-              <td>{product.date}</td>
+              <td>{product.registerDate}</td>
               <td>{product.stock}</td>
               <td>
                 <div className={styles.buttons}>
@@ -63,7 +103,10 @@ const ProductsPage = () => {
           ))}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}/>
     </div>
   );
 };

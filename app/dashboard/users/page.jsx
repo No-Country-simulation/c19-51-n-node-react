@@ -13,6 +13,8 @@ const UsersPage = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
 
     useEffect(() => {
       const fetchUsers = async () => {
@@ -29,9 +31,19 @@ const UsersPage = () => {
   
       fetchUsers();
     }, []);
+
+    const handlePageChange = (page) => {
+      setCurrentPage(page);
+    };
   
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(users.length / itemsPerPage);
+  
     
   
   return (
@@ -56,7 +68,7 @@ const UsersPage = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {currentItems.map((user) => (
             <tr key={user._id}>
               <td>
                 <div className={styles.user}>
@@ -92,7 +104,10 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
-      <Pagination/>
+      <Pagination
+       currentPage={currentPage}
+       totalPages={totalPages}
+       onPageChange={handlePageChange}/>
     </div>
   );
 };
