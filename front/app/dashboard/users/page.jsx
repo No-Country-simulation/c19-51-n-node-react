@@ -108,14 +108,10 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
-<<<<<<< HEAD
       <Pagination
        currentPage={currentPage}
        totalPages={totalPages}
        onPageChange={handlePageChange}/>
-=======
-      <Pagination />
->>>>>>> ab5bdbffeaf8a2fa24501e6d56d9dcb71673bb91
     </div>
   );
 };
