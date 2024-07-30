@@ -1,31 +1,50 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    products: [
-        {
-            product: {
+    orderId: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    items:
+        [{
+            productId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Product',
-                required: true
+                // required: true
             },
-            qty: {
+            description: {
+                type: String,
+                // required: false
+            },
+            quantity: {
                 type: Number,
-                required: true
+                min: 1,
+                // required: true
+            },
+            price: {
+                type: Number,
+                // required: true
+            },
+            totalItemPrice: {
+                type: Number,
+                // required: true
             }
-        }
-    ],
-    description: {
-        type: String,
-        required: false
-    },
-    totalPrice: {
+        }],
+    totalOrder: {
         type: Number,
-        required: true
+        // required: true
     },
-    registerDate: {
+    status: {
+        type: String,
+        enum: ['pending', 'accepted', 'in_process', 'cancelled'],
+        default: 'pending',
+        // required: true
+    },
+    orderDate: {
         type: Date,
         default: Date.now,
-        required: true
+        // required: true
     },
     updatedAt: {
         type: Date,
@@ -34,13 +53,15 @@ const orderSchema = new mongoose.Schema({
 });
 
 // Middleware para actualizar el campo 'updatedAt' antes de guardar
-orderSchema.pre('save', function (next) {
+orderSchema.pre('save', async function (next) {
     this.updatedAt = Date.now();
+
     next();
 });
 
-orderSchema.pre('findOneAndUpdate', function (next) {
-    this.set({ updatedAt: Date.now() });
+orderSchema.pre('findOneAndUpdate', async function (next) {
+    this.set({ updatedAt: Date.now() })
+
     next();
 });
 

@@ -40,14 +40,8 @@ export const createProduct = async (req, res) => {
         // Buscar categoría
         const category = await Category.findOne({ name: categoryName });
         if (!category) {
-            return res.status(400).json({ message: "Invalid Category" })
+            return res.status(400).json({ message: "Category not found" })
         };
-
-        // Verificar si existe la categoria
-        // const existingCategory = await Category.findById(category);
-        // if (!category) {
-        //     return res.status(400).json({ message: "Category does not exist" });
-        // }
 
         const newProduct = new Product({
             productId,
@@ -64,7 +58,7 @@ export const createProduct = async (req, res) => {
         await newProduct.save();
 
         // Poblar la categoría con el nombre antes de devolver la respuesta
-        await newProduct.populate('category', 'name').execPopulate();
+        await newProduct.populate('category', 'name');
 
         res.status(201).json({ message: "Product created successfully", product: newProduct });
     } catch (error) {
@@ -76,20 +70,18 @@ export const createProduct = async (req, res) => {
 // Actualizar un producto existente (por un administrador?)
 export const updateProduct = async (req, res) => {
     try {
-        const { productId, brand, model, description, specs, price, stock, image, category } = req.body;
+        const { productId, brand, model, description, specs, price, stock, image, categoryName } = req.body;
 
-        if (category) {
-            const existingCategory = await Category.findById(category);
-            if (!category) {
-                return res.status(400).json({ message: "Category does not exist" });
-            }
-        }
+        const category = await Category.findOne({ name: categoryName });
+        if (!category) {
+            return res.status(400).json({ message: "Category not found" })
+        };
 
         const product = await Product.findByIdAndUpdate(
             req.params.id,
-            { productId, brand, model, description, specs, price, stock, image, category },
+            { productId, brand, model, description, specs, price, stock, image, category: category._id },
             { new: true, runValidators: true }
-        );
+        ).populate('category', 'name');
 
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
