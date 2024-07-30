@@ -12,7 +12,7 @@ import validateObjectId from '../middlewares/validateObjectId.js';
 const router = Router();
 
 // Obtener todas las órdenes
-router.get('/', authenticateToken, getAllOrders);
+router.get('/', getAllOrders);
 
 // Obtener una orden por ID
 router.get('/:id', authenticateToken, validateObjectId, getOrderById);
