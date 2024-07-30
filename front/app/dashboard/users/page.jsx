@@ -19,7 +19,7 @@ const UsersPage = () => {
         try {
           const response = await axios.get('http://localhost:8000/api/users');
           setUsers(response.data)
-          console.log(response);
+          console.log(response.data);
         } catch (error) {
           setError(error.message);
         } finally {
@@ -77,7 +77,7 @@ const UsersPage = () => {
               <td>{new Date(user.registerDate).toLocaleDateString()}</td>
               <td>{user.role}</td>
               <div>
-              <Link href={"/dashboard/users/test"}>
+              <Link href={`/dashboard/users/${user._id}`} >
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>

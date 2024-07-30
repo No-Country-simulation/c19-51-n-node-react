@@ -6,7 +6,7 @@ import { useState } from "react";
 
     const [newUser, setNewUser] = ('');
 
-    updateDatos = () => {
+    const updateDatos = () => {
       
     }
 
