@@ -21,7 +21,7 @@ const UsersPage = () => {
         try {
           const response = await axios.get('http://localhost:8000/api/users');
           setUsers(response.data)
-          console.log(response);
+          console.log(response.data);
         } catch (error) {
           setError(error.message);
         } finally {
@@ -89,14 +89,18 @@ const UsersPage = () => {
               <td>{new Date(user.registerDate).toLocaleDateString()}</td>
               <td>{user.role}</td>
               <div>
-              <Link href={"/dashboard/users/test"}>
+              <Link href={`/dashboard/users/${user._id}`} >
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
               </Link>
               </div>
               <td>
-                <span className={`${styles[user.status.toLowerCase()]} ${styles.status}`}>
+                <span
+                  className={`${styles[user.status.toLowerCase()]} ${
+                    styles.status
+                  }`}
+                >
                   {user.status}
                 </span>
               </td>
@@ -104,10 +108,14 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
+<<<<<<< HEAD
       <Pagination
        currentPage={currentPage}
        totalPages={totalPages}
        onPageChange={handlePageChange}/>
+=======
+      <Pagination />
+>>>>>>> ab5bdbffeaf8a2fa24501e6d56d9dcb71673bb91
     </div>
   );
 };

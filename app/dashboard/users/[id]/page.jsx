@@ -1,59 +1,79 @@
-import React from "react";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import styles from "./sigle.user.module.css";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 const SingleUserPage = () => {
+  const { id } = useParams();
+
+  const [userData, setUserData] = useState(null);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/users/${id}`, {
+        withCredentials: true,
+      });
+      console.log(response.data);
+      setUserData(response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
-          <Image src="/noavatar.png" alt="ImgUser" fill />
+          <Image src={userData?.photo || "/noavatar.png"} alt="ImgUser" layout="fill" objectFit="cover" />
         </div>
-        User Example
+        {userData?.firstName} {userData?.lastName}
       </div>
 
       <div className={styles.formContainer}>
         <form className={styles.form}>
-          <label>Username</label>
-          <input type="text" name="username" placeholder="John Doe" />
+          <label>Identification</label>
+          <input type="text" name="identification" placeholder="Identification" value={userData?.identification || ''} readOnly />
+
+          <label>Register Date</label>
+          <input type="text" name="registerDate" placeholder="Register Date" value={new Date(userData?.registerDate).toLocaleDateString() || ''} readOnly />
+
+          <label>First Name</label>
+          <input type="text" name="firstName" placeholder="First Name" value={userData?.firstName || ''} readOnly />
+
+          <label>Last Name</label>
+          <input type="text" name="lastName" placeholder="Last Name" value={userData?.lastName || ''} readOnly />
 
           <label>Phone</label>
-          <input type="text" name="Phone" placeholder="1165152620" />
-
-          <label>Password</label>
-          <input type="password" name="password"/>
+          <input type="text" name="phone" placeholder="Phone" value={userData?.phone || ''} readOnly />
 
           <label>E-Mail</label>
-          <input type="email" name="email" placeholder="jhondoe@gmail.com" />
+          <input type="email" name="email" placeholder="Email" value={userData?.email || ''} readOnly />
 
-          <label>Created at</label>
-          <input type="text" name="created" placeholder="25/03/2003" />
-
-          <label>Is Admin?</label>
-          <select name="isAdmin" id="isAdmin">
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
-          </select>
-
-          <label>Is Seller?</label>
-          <select name="isSeller" id="isSeller">
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
-          </select>
-
-          <label>Is Active?</label>
-          <select name="isActive" id="isActive">
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
+         
+          <label>Role</label>
+          <select name="role" id="role" value={userData?.role || ''} readOnly>
+            <option value="administrator">Admin</option>
+            <option value="seller">Seller</option>
           </select>
 
           <label>Status</label>
-          <input type="text" name="status" placeholder="Active" />
+          <select name="status" id="status" value={userData?.status || ''} readOnly>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
 
-          <label>Adress</label>
-          <textarea type="text" name="adress" placeholder="London" />
+          <label>Address</label>
+          <textarea type="text" name="address" placeholder="Address" value={userData?.address || ''} readOnly />
 
-           <button>Update</button> 
         </form>
       </div>
     </div>
