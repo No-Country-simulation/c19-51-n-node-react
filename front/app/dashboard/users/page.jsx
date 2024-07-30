@@ -1,3 +1,4 @@
+"use client"
 import Search from "../../components/dashboard/search/search";
 import styles from "./users.module.css";
 import Image from "next/image";
@@ -51,14 +52,18 @@ const UsersPage = () => {
               <td>{user.createdAt}</td>
               <td>{user.role}</td>
               <div>
-              <Link href={"/dashboard/users/test"}>
-                    <button className={`${styles.button} ${styles.view}`}>
-                      View
-                    </button>
-              </Link>
+                <Link href={"/dashboard/users/test"}>
+                  <button className={`${styles.button} ${styles.view}`}>
+                    View
+                  </button>
+                </Link>
               </div>
               <td>
-                <span className={`${styles[user.status.toLowerCase()]} ${styles.status}`}>
+                <span
+                  className={`${styles[user.status.toLowerCase()]} ${
+                    styles.status
+                  }`}
+                >
                   {user.status}
                 </span>
               </td>
@@ -66,7 +71,7 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import styles from "./login.module.css"
 const LoginPage = () => {
   return <div className={styles.container}>    
     <form action="" className={styles.form}>
-      <h1>Login with you user</h1>
+      <h1>Login Dashboard</h1>
       <input type="text" placeholder="Username"/>
       <input type="password" placeholder="Password"/>
       <button>Login</button>
