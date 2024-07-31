@@ -9,7 +9,8 @@ import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
-import orderRoutes from "./routes/order.routes.js"
+import orderRoutes from "./routes/order.routes.js";
+import dashboardRoutes from './routes/dashboard.routes.js';
 import { FRONTEND_URL } from "./config.js";
 import { errorHandler } from './middlewares/errorHandler.js';
 
@@ -37,6 +38,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/orders", orderRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 // Middleware de manejo de errores
 app.use(errorHandler);

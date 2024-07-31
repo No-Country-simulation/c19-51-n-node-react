@@ -10,16 +10,31 @@ import Pagination from "../../components/dashboard/pagination/Pagination"
 
 const UsersPage = () => {
 
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
 
+<<<<<<< HEAD
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/users');
+        setUsers(response.data)
+        console.log(response.data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+=======
     useEffect(() => {
       const fetchUsers = async () => {
         try {
           const response = await axios.get('http://localhost:8000/api/users');
           setUsers(response.data)
-          console.log(response);
+          console.log(response.data);
         } catch (error) {
           setError(error.message);
         } finally {
@@ -29,11 +44,31 @@ const UsersPage = () => {
   
       fetchUsers();
     }, []);
-  
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    
-  
+
+   
+
+    const handlePageChange = (page) => {
+      setCurrentPage(page);
+>>>>>>> 39a10ec697ea3c6e979244cf84995fc03739181f
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(users.length / itemsPerPage);
+
+
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -56,12 +91,12 @@ const UsersPage = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {currentItems.map((user) => (
             <tr key={user._id}>
               <td>
                 <div className={styles.user}>
                   <Image
-                    src="/noavatar.png"
+                    src={user?.photo || "/noavatar.png"}
                     alt="Img User"
                     width={40}
                     height={40}
@@ -77,7 +112,7 @@ const UsersPage = () => {
               <td>{new Date(user.registerDate).toLocaleDateString()}</td>
               <td>{user.role}</td>
               <div>
-                <Link href={"/dashboard/users/test"}>
+                <Link href={`/dashboard/users/${user._id}`} >
                   <button className={`${styles.button} ${styles.view}`}>
                     View
                   </button>
@@ -85,9 +120,8 @@ const UsersPage = () => {
               </div>
               <td>
                 <span
-                  className={`${styles[user.status.toLowerCase()]} ${
-                    styles.status
-                  }`}
+                  className={`${styles[user.status.toLowerCase()]} ${styles.status
+                    }`}
                 >
                   {user.status}
                 </span>
@@ -96,7 +130,16 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination
+<<<<<<< HEAD
+       currentPage={currentPage}
+       totalPages={totalPages}
+       onPageChange={handlePageChange}/>
+=======
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange} />
+>>>>>>> dashboard
     </div>
   );
 };

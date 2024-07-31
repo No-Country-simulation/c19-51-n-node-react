@@ -25,21 +25,7 @@ const integrantes = [
         nombre: 'Enmanuel Rodriguez',
         equipo: 'Full Stack',
         link: 'https://github.com/enmanuelrodmac',
-      },
-
-      {
-        imagen: '/imageJohn.jpg',
-        nombre: 'Jhon Fonseca 1',
-        equipo: 'Back End',
-        link: 'https://github.com/John-fonseca',
-      },
-
-      {
-        imagen: '/imageLuis.jpg',
-        nombre: 'Luis Castañeda',
-        equipo: 'Back End',
-        link: 'https://github.com/luis1558',
-      },
+      }
     
   ];
 

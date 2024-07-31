@@ -6,7 +6,7 @@ import { useState } from "react";
 
     const [newUser, setNewUser] = ('');
 
-    updateDatos = () => {
+    const updateDatos = () => {
       
     }
 
@@ -24,20 +24,11 @@ import { useState } from "react";
         />
         <input type="phone" placeholder="Phone" name="phone" />
         <input type="date" />
-        <select name="isAdmin" id="isAdmin">
-          <option value={false}>
-            Is Admin?
-          </option>
-          <option value={true}>Yes</option>
-          <option value={false}>No</option>
-        </select>
-        <select name="isAdmin" id="isSeller">
-          <option value={false}>
-            Is Seller?
-          </option>
-          <option value={true}>Yes</option>
-          <option value={false}>No</option>
-        </select>
+      
+          <select name="role" id="role" value= '' placeholder="Role">
+            <option value="seller">Seller</option>
+            <option value="administrator">Admin</option>
+          </select>
 
         <select name="isActive" id="isActive">
           <option value={true}>
