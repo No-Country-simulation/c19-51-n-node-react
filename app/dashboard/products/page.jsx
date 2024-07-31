@@ -18,6 +18,20 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
 
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZoneName: 'short'
+    };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -97,7 +111,7 @@ const ProductsPage = () => {
               <td>{product.description}</td>
               <td>{product.category.name}</td>
               <td>{product.price}</td>
-              <td>{new Date(product.registerDate).toLocaleDateString()}</td>
+              <td>{formatDate(product.registerDate)}</td>
               <td>{product.stock}</td>
               <td>
                 <div className={styles.buttons}>

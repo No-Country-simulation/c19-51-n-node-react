@@ -6,7 +6,9 @@ import { useState, useEffect } from "react";
 import Search from "../../components/dashboard/search/page";
 import axios from "axios";
 
+
 const Sales = () => {
+  
 
   const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(true);

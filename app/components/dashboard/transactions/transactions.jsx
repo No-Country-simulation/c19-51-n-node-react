@@ -4,6 +4,7 @@ import Link from "next/link";
 import transactions from "../../data/transactions";
 
 const Transactions = () => {
+  
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Latest Sells</h2>
