@@ -16,6 +16,7 @@ const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
 
+<<<<<<< HEAD
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -27,6 +28,28 @@ const UsersPage = () => {
       } finally {
         setLoading(false);
       }
+=======
+    useEffect(() => {
+      const fetchUsers = async () => {
+        try {
+          const response = await axios.get('http://localhost:8000/api/users');
+          setUsers(response.data)
+          console.log(response.data);
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchUsers();
+    }, []);
+
+   
+
+    const handlePageChange = (page) => {
+      setCurrentPage(page);
+>>>>>>> 39a10ec697ea3c6e979244cf84995fc03739181f
     };
 
     fetchUsers();
@@ -73,7 +96,7 @@ const UsersPage = () => {
               <td>
                 <div className={styles.user}>
                   <Image
-                    src="/noavatar.png"
+                    src={user?.photo || "/noavatar.png"}
                     alt="Img User"
                     width={40}
                     height={40}

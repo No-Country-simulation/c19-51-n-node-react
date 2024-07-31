@@ -5,6 +5,7 @@ import Search from "../../components/dashboard/search/page";
 import Pagination from "../../components/dashboard/pagination/Pagination";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 
 
@@ -32,6 +33,16 @@ const ProductsPage = () => {
 
     fetchUsers();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/products/${id}`);
+      setProducts(products.filter((product) => product._id !== id));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      setError(error.message);
+    }
+  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -73,28 +84,31 @@ const ProductsPage = () => {
             <tr key={product._id}>
               <td>
                 <div className={styles.product}>
-                  <img
-                    src="/noproduct.jpg"
+                  <Image
+                   src={product?.image || "/noproduct.jpg"}
                     alt={product.name}
+                    width={40}
+                    height={40}
                     className={styles.productImage}
                   />
                   {product.name}
                 </div>
               </td>
               <td>{product.description}</td>
-              <td>{`${product.category.name} ${product.category._id}`}</td>
+              <td>{product.category.name}</td>
               <td>{product.price}</td>
-              <td>{product.registerDate}</td>
+              <td>{new Date(product.registerDate).toLocaleDateString()}</td>
               <td>{product.stock}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={"/dashboard/products/test"}>
+                  <Link href={`/dashboard/products/${product._id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
                     
                   </Link>
-                  <button className={`${styles.button} ${styles.delete}`}>
+                  <button className={`${styles.button} ${styles.delete}`}
+                  onClick={() => handleDelete(product._id)}>
                     Delete
                   </button>
                 </div>
