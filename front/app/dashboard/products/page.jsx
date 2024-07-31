@@ -95,9 +95,9 @@ const ProductsPage = () => {
                 </div>
               </td>
               <td>{product.description}</td>
-              <td>{`${product.category.name} ${product.category._id}`}</td>
+              <td>{product.category.name}</td>
               <td>{product.price}</td>
-              <td>{product.registerDate}</td>
+              <td>{new Date(product.registerDate).toLocaleDateString()}</td>
               <td>{product.stock}</td>
               <td>
                 <div className={styles.buttons}>
