@@ -32,6 +32,8 @@ const UsersPage = () => {
       fetchUsers();
     }, []);
 
+   
+
     const handlePageChange = (page) => {
       setCurrentPage(page);
     };
@@ -73,7 +75,7 @@ const UsersPage = () => {
               <td>
                 <div className={styles.user}>
                   <Image
-                    src="/noavatar.png"
+                    src={user?.photo || "/noavatar.png"}
                     alt="Img User"
                     width={40}
                     height={40}

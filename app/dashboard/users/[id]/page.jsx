@@ -74,6 +74,8 @@ const SingleUserPage = () => {
           <label>Address</label>
           <textarea type="text" name="address" placeholder="Address" value={userData?.address || ''} readOnly />
 
+          <button>Update</button> 
+
         </form>
       </div>
     </div>
