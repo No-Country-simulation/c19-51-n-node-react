@@ -58,7 +58,7 @@ const SingleUserPage = () => {
           <label>E-Mail</label>
           <input type="email" name="email" placeholder="Email" value={userData?.email || ''} readOnly />
 
-         
+
           <label>Role</label>
           <select name="role" id="role" value={userData?.role || ''} readOnly>
             <option value="administrator">Admin</option>

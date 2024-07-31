@@ -10,42 +10,42 @@ import Pagination from "../../components/dashboard/pagination/Pagination"
 
 const UsersPage = () => {
 
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(5);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
 
-    useEffect(() => {
-      const fetchUsers = async () => {
-        try {
-          const response = await axios.get('http://localhost:8000/api/users');
-          setUsers(response.data)
-          console.log(response.data);
-        } catch (error) {
-          setError(error.message);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchUsers();
-    }, []);
-
-    const handlePageChange = (page) => {
-      setCurrentPage(page);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/users');
+        setUsers(response.data)
+        console.log(response.data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
-  
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(users.length / itemsPerPage);
-  
-    
-  
+    fetchUsers();
+  }, []);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(users.length / itemsPerPage);
+
+
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -89,17 +89,16 @@ const UsersPage = () => {
               <td>{new Date(user.registerDate).toLocaleDateString()}</td>
               <td>{user.role}</td>
               <div>
-              <Link href={`/dashboard/users/${user._id}`} >
-                    <button className={`${styles.button} ${styles.view}`}>
-                      View
-                    </button>
-              </Link>
+                <Link href={`/dashboard/users/${user._id}`} >
+                  <button className={`${styles.button} ${styles.view}`}>
+                    View
+                  </button>
+                </Link>
               </div>
               <td>
                 <span
-                  className={`${styles[user.status.toLowerCase()]} ${
-                    styles.status
-                  }`}
+                  className={`${styles[user.status.toLowerCase()]} ${styles.status
+                    }`}
                 >
                   {user.status}
                 </span>
@@ -109,9 +108,15 @@ const UsersPage = () => {
         </tbody>
       </table>
       <Pagination
+<<<<<<< HEAD
        currentPage={currentPage}
        totalPages={totalPages}
        onPageChange={handlePageChange}/>
+=======
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange} />
+>>>>>>> dashboard
     </div>
   );
 };
