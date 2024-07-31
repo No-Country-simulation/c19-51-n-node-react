@@ -1,7 +1,7 @@
 "use client"
 import styles from "./products.module.css";
 import Link from "next/link";
-import Search from "../../components/dashboard/search/page";
+import Search from "../../components/dashboard/search/search";
 import Pagination from "../../components/dashboard/pagination/Pagination";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -12,18 +12,20 @@ import Image from "next/image";
 const ProductsPage = () => {
 
 
-  const [products, setProducts] = useState([]);
+  const [products, setProductos] = useState([]);
+  const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchProductos = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/products/');
-        console.log(response.data);
-        setProducts(response.data)
+        const respuesta = await axios.get('http://localhost:8000/api/products/');
+        setProductos(respuesta.data)
+        setProductosFiltrados(respuesta.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -31,8 +33,28 @@ const ProductsPage = () => {
       }
     };
 
-    fetchUsers();
+    fetchProductos();
   }, []);
+
+  useEffect(() => {
+    if (terminoBusqueda) {
+      const filtrados = products.filter(products =>
+        products.model.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
+        products.brand.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
+        products.description.toLowerCase().includes(terminoBusqueda.toLowerCase())
+      );
+      setProductosFiltrados(filtrados);
+    } else {
+      setProductosFiltrados(products);
+    }
+  }, [terminoBusqueda, products]);
+
+  const handleBusqueda = (query) => {
+    setTerminoBusqueda(query);
+    setCurrentPage(1);
+  };
+
+  
 
   const handleDelete = async (id) => {
     try {
@@ -48,21 +70,18 @@ const ProductsPage = () => {
     setCurrentPage(page);
   };
 
-
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-
-  
+  const currentItems = productosFiltrados.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(productosFiltrados.length / itemsPerPage);  
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Search placeholder="Search a Product..." />
+        <Search placeholder="Search a Product..."  onSearch={handleBusqueda}/>
         <Link href="/dashboard/products/add">
           <button className={styles.addButton}>Add Product</button>
         </Link>
