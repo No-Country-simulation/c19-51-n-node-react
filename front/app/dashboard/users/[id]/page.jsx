@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import styles from "./sigle.user.module.css";
@@ -10,23 +10,63 @@ axios.defaults.withCredentials = true;
 
 const SingleUserPage = () => {
   const { id } = useParams();
-
   const [userData, setUserData] = useState(null);
+  const [formData, setFormData] = useState({
+    identification: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    role: '',
+    status: '',
+    address: ''
+  });
 
-  const fetchUsers = async () => {
+  const fetchUser = async () => {
     try {
       const response = await axios.get(`http://localhost:8000/api/users/${id}`, {
         withCredentials: true,
       });
-      console.log(response.data);
       setUserData(response.data);
+      setFormData({
+        identification: response.data.identification,
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
+        phone: response.data.phone,
+        email: response.data.email,
+        role: response.data.role,
+        status: response.data.status,
+        address: response.data.address,
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`http://localhost:8000/api/users/${id}`, formData, {
+        withCredentials: true,
+      });
+      console.log(response.data);
+      // Actualizar el estado con los datos actualizados del usuario
+      setUserData(response.data.user);
     } catch (error) {
       console.error(error.message);
     }
   };
 
   useEffect(() => {
-    fetchUsers();
+    fetchUser();
   }, []);
 
   return (
@@ -39,43 +79,41 @@ const SingleUserPage = () => {
       </div>
 
       <div className={styles.formContainer}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <label>Identification</label>
-          <input type="text" name="identification" placeholder="Identification" value={userData?.identification || ''} readOnly />
+          <input type="text" name="identification" placeholder="Identification" value={formData.identification} onChange={handleChange} />
 
           <label>Register Date</label>
-          <input type="text" name="registerDate" placeholder="Register Date" value={new Date(userData?.registerDate).toLocaleDateString() || ''} readOnly />
+          <input type="text" name="registerDate" placeholder="Register Date" value={new Date(userData?.registerDate).toLocaleDateString()} readOnly />
 
           <label>First Name</label>
-          <input type="text" name="firstName" placeholder="First Name" value={userData?.firstName || ''} readOnly />
+          <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
 
           <label>Last Name</label>
-          <input type="text" name="lastName" placeholder="Last Name" value={userData?.lastName || ''} readOnly />
+          <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
 
           <label>Phone</label>
-          <input type="text" name="phone" placeholder="Phone" value={userData?.phone || ''} readOnly />
+          <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} />
 
           <label>E-Mail</label>
-          <input type="email" name="email" placeholder="Email" value={userData?.email || ''} readOnly />
-
+          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
 
           <label>Role</label>
-          <select name="role" id="role" value={userData?.role || ''} readOnly>
+          <select name="role" value={formData.role} onChange={handleChange}>
             <option value="administrator">Admin</option>
             <option value="seller">Seller</option>
           </select>
 
           <label>Status</label>
-          <select name="status" id="status" value={userData?.status || ''} readOnly>
+          <select name="status" value={formData.status} onChange={handleChange}>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
 
           <label>Address</label>
-          <textarea type="text" name="address" placeholder="Address" value={userData?.address || ''} readOnly />
+          <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} />
 
-          <button>Update</button> 
-
+          <button type="submit">Update</button>
         </form>
       </div>
     </div>

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import Search from "../../components/dashboard/search/search";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./users.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import Pagination from "../../components/dashboard/pagination/Pagination"
+import Pagination from "../../components/dashboard/pagination/Pagination";
 
 const UsersPage = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -19,10 +19,10 @@ const UsersPage = () => {
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const respuesta = await axios.get('http://localhost:8000/api/users');
+        const respuesta = await axios.get("http://localhost:8000/api/users");
         setUsuarios(respuesta.data);
         setUsuariosFiltrados(respuesta.data);
-       } catch (error) {
+      } catch (error) {
         setError(error.message);
       } finally {
         setCargando(false);
@@ -34,10 +34,11 @@ const UsersPage = () => {
 
   useEffect(() => {
     if (terminoBusqueda) {
-      const filtrados = usuarios.filter(usuario =>
-        usuario.firstName.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
-        usuario.lastName.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
-        usuario.email.toLowerCase().includes(terminoBusqueda.toLowerCase())
+      const filtrados = usuarios.filter(
+        (usuario) =>
+          usuario.firstName.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
+          usuario.lastName.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
+          usuario.email.toLowerCase().includes(terminoBusqueda.toLowerCase())
       );
       setUsuariosFiltrados(filtrados);
     } else {
@@ -63,7 +64,7 @@ const UsersPage = () => {
   const totalPaginas = Math.ceil(usuariosFiltrados.length / itemsPorPagina);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.containerMain}>
       <div className={styles.top}>
         <Search placeholder="Buscar un usuario..." onSearch={handleBusqueda} />
         <Link href="/dashboard/users/adduser">
@@ -95,8 +96,7 @@ const UsersPage = () => {
                     height={40}
                     className={styles.userImage}
                   />
-                  {usuario.firstName} {" "}
-                  {usuario.lastName}
+                  {usuario.firstName} {usuario.lastName}
                 </div>
               </td>
               <td>{usuario.email}</td>
@@ -104,17 +104,17 @@ const UsersPage = () => {
               <td>{usuario.phone}</td>
               <td>{new Date(usuario.registerDate).toLocaleDateString()}</td>
               <td>{usuario.role}</td>
-              <div>
-                <Link href={`/dashboard/users/${usuario._id}`} >
-                  <button className={`${styles.button} ${styles.view}`}>
-                    Ver
-                  </button>
-                </Link>
-              </div>
               <td>
-                <span
-                  className={`${styles[usuario.status.toLowerCase()]} ${styles.status}`}
-                >
+                <div>
+                  <Link href={`/dashboard/users/${usuario._id}`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      Ver
+                    </button>
+                  </Link>
+                </div>
+              </td>
+              <td>
+                <span className={`${styles[usuario.status.toLowerCase()]} ${styles.status}`}>
                   {usuario.status}
                 </span>
               </td>
@@ -125,9 +125,10 @@ const UsersPage = () => {
       <Pagination
         currentPage={paginaActual}
         totalPages={totalPaginas}
-        onPageChange={handleCambioPagina} />
+        onPageChange={handleCambioPagina}
+      />
     </div>
   );
-}
+};
 
 export default UsersPage;
