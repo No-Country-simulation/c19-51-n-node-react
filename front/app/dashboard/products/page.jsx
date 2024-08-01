@@ -11,6 +11,8 @@ import Image from "next/image";
 
 const ProductsPage = () => {
 
+  
+
 
   const [products, setProductos] = useState([]);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
@@ -19,6 +21,17 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
+
+  
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return date.toLocaleDateString(undefined, options);
+  };
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -89,7 +102,7 @@ const ProductsPage = () => {
       <table className={styles.table}>
         <thead>
           <tr className={styles.cat}>
-            <td>Title</td>
+            <td>Image</td>
             <td>Description</td>
             <td>Category</td>
             <td>Value</td>
@@ -116,7 +129,7 @@ const ProductsPage = () => {
               <td>{product.description}</td>
               <td>{product.category.name}</td>
               <td>{product.price}</td>
-              <td>{new Date(product.registerDate).toLocaleDateString()}</td>
+              <td>{formatDate(product.registerDate)}</td>
               <td>{product.stock}</td>
               <td>
                 <div className={styles.buttons}>

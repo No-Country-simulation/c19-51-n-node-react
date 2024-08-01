@@ -21,10 +21,6 @@ const Sales = () => {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZoneName: 'short'
     };
     return date.toLocaleDateString(undefined, options);
   };
@@ -79,7 +75,7 @@ const Sales = () => {
         <thead>
           <tr className={styles.cat}>
           {/* <td>Name</td> */}
-            <td>Id sell</td>
+            <td>Order Id</td>
             <td>Products</td>
             <td>Total Amount</td>
             <td>Sale Date</td>

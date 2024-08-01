@@ -16,6 +16,17 @@ const UsersPage = () => {
   const [itemsPorPagina] = useState(5);
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
 
+  
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
@@ -68,20 +79,20 @@ const UsersPage = () => {
       <div className={styles.top}>
         <Search placeholder="Buscar un usuario..." onSearch={handleBusqueda} />
         <Link href="/dashboard/users/adduser">
-          <button className={styles.addButon}>Agregar Nuevo Usuario</button>
+          <button className={styles.addButon}>Add New User</button>
         </Link>
       </div>
       <table className={styles.table}>
         <thead>
           <tr className={styles.cat}>
-            <td>Nombre Completo</td>
-            <td>Correo Electrónico</td>
-            <td>Dirección</td>
-            <td>Teléfono</td>
-            <td>Fecha de Creación</td>
-            <td>Rol</td>
-            <td>Acción</td>
-            <td>Estado</td>
+            <td>Full Name</td>
+            <td>E-Mail</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Created at</td>
+            <td>Role</td>
+            <td>Action</td>
+            <td>Status</td>
           </tr>
         </thead>
         <tbody>
@@ -102,13 +113,13 @@ const UsersPage = () => {
               <td>{usuario.email}</td>
               <td>{usuario.address}</td>
               <td>{usuario.phone}</td>
-              <td>{new Date(usuario.registerDate).toLocaleDateString()}</td>
+              <td>{formatDate(usuario.registerDate)}</td>
               <td>{usuario.role}</td>
               <td>
                 <div>
                   <Link href={`/dashboard/users/${usuario._id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
-                      Ver
+                      View
                     </button>
                   </Link>
                 </div>

@@ -67,7 +67,6 @@
     border: none;
     cursor: pointer;
     transition: all 300ms;
-    margin-top: 17px;
 }
 
 .button:hover {
