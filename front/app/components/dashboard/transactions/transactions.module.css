@@ -46,7 +46,7 @@
     background-color: #f7cb7375;
 }
 
-.done{
+.accepted{
     background-color: green;
 }
 
@@ -54,7 +54,7 @@
     background-color: red;
 }
 
-.inProcess{
+.in_process{
     background-color: blue;
 }
 

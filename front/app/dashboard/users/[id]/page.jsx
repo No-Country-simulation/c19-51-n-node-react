@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "./sigle.user.module.css";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter  } from "next/navigation";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
 const SingleUserPage = () => {
   const { id } = useParams();
+  const router = useRouter();
   const [userData, setUserData] = useState(null);
   const [formData, setFormData] = useState({
     identification: '',
@@ -60,10 +61,14 @@ const SingleUserPage = () => {
       console.log(response.data);
       // Actualizar el estado con los datos actualizados del usuario
       setUserData(response.data.user);
-    } catch (error) {
-      console.error(error.message);
-    }
+      router.push('/dashboard/users');  
+  } catch (error) {
+    console.error(error.message);
+  }
   };
+
+ 
+
 
   useEffect(() => {
     fetchUser();
@@ -113,7 +118,7 @@ const SingleUserPage = () => {
           <label>Address</label>
           <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} />
 
-          <button type="submit">Update</button>
+          <button type="submit" onClick={handleSubmit}>Update</button>
         </form>
       </div>
     </div>

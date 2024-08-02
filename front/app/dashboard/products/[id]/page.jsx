@@ -3,12 +3,13 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./single.product.module.css";
 import Image from "next/image";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams,useRouter } from "next/navigation";
 
 axios.defaults.withCredentials = true;
 
 const SingleProductPage = () => {
   const { id } = useParams();
+  const router = useRouter();
   const [productData, setProductData] = useState({
     brand: "",
     model: "",
@@ -91,9 +92,10 @@ const SingleProductPage = () => {
         withCredentials: true,
       });
       alert("Producto actualizado exitosamente");
-    } catch (error) {
-      console.error(error.message);
-    }
+     router.push('/dashboard/products'); 
+  } catch (error) {
+    console.error(error.message);
+  }
   };
 
   if (loading) return <div>Cargando...</div>;
