@@ -25,7 +25,7 @@ const SingleUserPage = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/users/${id}`, {
+      const response = await axios.get(`http://localhost:8000/api/users`, {
         withCredentials: true,
       });
       setUserData(response.data);
@@ -55,10 +55,9 @@ const SingleUserPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8000/api/users/${id}`, formData, {
+      const response = await axios.post(`http://localhost:8000/api/users`, formData, {
         withCredentials: true,
       });
-      console.log(response.data);
       // Actualizar el estado con los datos actualizados del usuario
       setUserData(response.data);
       router.push('/dashboard/users');  

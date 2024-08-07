@@ -27,6 +27,7 @@ const UsersPage = () => {
     return date.toLocaleDateString(undefined, options);
   };
 
+  //Usuarios de la Base de Datos
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
@@ -43,6 +44,7 @@ const UsersPage = () => {
     fetchUsuarios();
   }, []);
 
+  //funcion search
   useEffect(() => {
     if (terminoBusqueda) {
       const filtrados = usuarios.filter(
