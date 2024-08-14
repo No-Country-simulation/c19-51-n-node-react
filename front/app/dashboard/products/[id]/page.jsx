@@ -52,7 +52,7 @@ const SingleProductPage = () => {
   useEffect(() => {
     fetchProduct();
     fetchCategories();
-  }, [id]);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

@@ -11,9 +11,6 @@ import Image from "next/image";
 
 const ProductsPage = () => {
 
-  
-
-
   const [products, setProductos] = useState([]);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -71,8 +68,8 @@ const ProductsPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/products/${id}`);
-      setProducts(products.filter((product) => product._id !== id));
+      await axios.delete(`http://localhost:8000/api/products/`);
+      setProductos(products.filter((product) => product._id !== id));
     } catch (error) {
       console.error("Error deleting product:", error);
       setError(error.message);
@@ -95,7 +92,7 @@ const ProductsPage = () => {
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search a Product..."  onSearch={handleBusqueda}/>
-        <Link href="/dashboard/products/add">
+        <Link href="/dashboard/products/addproduct">
           <button className={styles.addButton}>Add Product</button>
         </Link>
       </div>
