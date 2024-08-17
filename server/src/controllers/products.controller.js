@@ -27,43 +27,92 @@ export const getProductById = async (req, res) => {
     }
 };
 
-// Crear un nuevo producto (por un administrador?)
+// // Crear un nuevo producto (por un administrador?)
+// export const createProduct = async (req, res) => {
+//     try {
+//         let { productId, brand, model, description, specs, price, stock, image, categoryName } = req.body;
+
+//         const existingProduct = await Product.findOne({ productId });
+//         if (existingProduct) {
+//             return res.status(400).json({ message: "Product already exist" });
+//         }
+
+//         // Buscar categoría
+//         const category = await Category.findOne({ name: categoryName });
+//         if (!category) {
+//             return res.status(400).json({ message: "Category not found" })
+//         };
+
+//         const newProduct = new Product({
+//             productId,
+//             image,
+//             brand,
+//             model,
+//             description,
+//             specs,
+//             price,
+//             stock,
+//             category: category._id
+//         });
+
+//         await newProduct.save();
+
+//         // Poblar la categoría con el nombre antes de devolver la respuesta
+//         await newProduct.populate('category', 'name');
+
+//         res.status(201).json({ message: "Product created successfully", product: newProduct });
+//     } catch (error) {
+//         logger.error("Error creating product:", error);
+//         res.status(500).json({ message: "Error creating product", error });
+//     }
+// };
+
 export const createProduct = async (req, res) => {
     try {
-        let { productId, brand, model, description, specs, price, stock, image, categoryName } = req.body;
+        const { productId, brand, model, description, specs, price, stock, image, categoryName } = req.body;
 
+        // Verificar si el producto ya existe
         const existingProduct = await Product.findOne({ productId });
         if (existingProduct) {
-            return res.status(400).json({ message: "Product already exist" });
+            return res.status(400).json({ message: "Product already exists" });
         }
 
-        // Buscar categoría
+        // Buscar la categoría por nombre
         const category = await Category.findOne({ name: categoryName });
         if (!category) {
-            return res.status(400).json({ message: "Category not found" })
-        };
+            return res.status(400).json({ message: "Category not found" });
+        }
 
+        // Crear un nuevo producto
         const newProduct = new Product({
             productId,
-            image,
             brand,
             model,
             description,
             specs,
             price,
             stock,
-            category: category._id
+            image,
+            category: category._id // Usar el ID de la categoría encontrada
         });
 
+        // Guardar el producto en la base de datos
         await newProduct.save();
 
         // Poblar la categoría con el nombre antes de devolver la respuesta
         await newProduct.populate('category', 'name');
 
-        res.status(201).json({ message: "Product created successfully", product: newProduct });
+        res.status(201).json({
+            message: "Product created successfully",
+            product: newProduct
+        });
     } catch (error) {
+        // Loguear el error y enviar una respuesta con el código de error 500
         logger.error("Error creating product:", error);
-        res.status(500).json({ message: "Error creating product", error });
+        res.status(500).json({
+            message: "Error creating product",
+            error: error.message
+        });
     }
 };
 
