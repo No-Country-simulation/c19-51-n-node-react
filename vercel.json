@@ -1,0 +1,25 @@
+{
+    "projects": [
+      {
+        "name": "frontend",
+        "src": "front",
+        "builds": [
+          {
+            "src": "front/package.json",
+            "use": "@vercel/next"
+          }
+        ]
+      },
+      {
+        "name": "backend",
+        "src": "server",
+        "builds": [
+          {
+            "src": "server/package.json",
+            "use": "@vercel/node"
+          }
+        ]
+      }
+    ]
+  }
+  
